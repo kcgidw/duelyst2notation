@@ -26,20 +26,17 @@ function toggleNotation(keyEvent) {
 }
 document.addEventListener('keydown', toggleNotation);
 
-function rebuild(argsSettings = {}) {
-	let loaded = localStorage.getItem('duelyst2notation.settings' ?? '{}');
-	let settings = {
-		...defaultSettings,
-		...JSON.parse(loaded),
-		...argsSettings,
-	};
+function rebuild() {
+	chrome.storage.local.get(['settings'], function (result) {
+		let settings = { ...defaultSettings, ...(result?.settings ?? {}) };
 
-	let divs = document.querySelectorAll('.notation ');
-	for (div of divs) {
-		div.remove();
-	}
-	buildLeft(settings);
-	buildBottom(settings);
+		let divs = document.querySelectorAll('.notation ');
+		for (div of divs) {
+			div.remove();
+		}
+		buildLeft(settings);
+		buildBottom(settings);
+	});
 }
 
 let leftStyles = {
@@ -136,5 +133,7 @@ function buildBottom(settings) {
 }
 
 chrome.runtime.onMessage.addListener(function (request) {
-	rebuild(request.settings);
+	if (request.type === 'settings updated') {
+		rebuild();
+	}
 });

@@ -6,7 +6,8 @@ Inspired by https://github.com/ethanjurman/DuelystNotation
 
 -   Press '**N**' to toggle overlay
 -   Options in extension popup
--   Multiple notation styles
+
+Features options like font size, text positioning, opacity, and even notation style!
 
 ## Install
 

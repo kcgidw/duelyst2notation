@@ -19,7 +19,9 @@ function populateForm(data) {
 
 function notifyTab(settings) {
 	chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
-		chrome.tabs.sendMessage(tabs[0].id, { settings });
+		chrome.tabs
+			.sendMessage(tabs[0].id, { type: 'settings updated' })
+			.catch(() => {});
 	});
 }
 
@@ -29,7 +31,10 @@ async function save() {
 		let val = document.getElementById(id).value;
 		newSettings[id] = val === '' ? defaultSettings[id] : val;
 	});
-	localStorage.setItem('settings', JSON.stringify(newSettings));
+	chrome.storage.local.set({ settings: newSettings }, function () {
+		console.log('Saved');
+	});
+
 	notifyTab(newSettings);
 }
 
@@ -39,14 +44,16 @@ function reset() {
 }
 
 document.addEventListener('DOMContentLoaded', function () {
-	let loaded = localStorage.getItem('settings' ?? '{}');
-	let settings = { ...defaultSettings, ...JSON.parse(loaded) };
-	populateForm(settings);
+	chrome.storage.local.get(['settings'], function (result) {
+		let settings = { ...defaultSettings, ...(result?.settings ?? {}) };
 
-	let ctrls = document.querySelectorAll('input, select');
-	for (let el of ctrls) {
-		el.onchange = save;
-	}
+		populateForm(settings);
 
-	document.getElementById('reset').onclick = reset;
+		let ctrls = document.querySelectorAll('input, select');
+		for (let el of ctrls) {
+			el.onchange = save;
+		}
+
+		document.getElementById('reset').onclick = reset;
+	});
 });

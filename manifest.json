@@ -12,6 +12,6 @@
 			"js": ["notation.js"]
 		}
 	],
-	"permissions": ["tabs"],
+	"permissions": ["tabs", "storage"],
 	"host_permissions": ["https://alpha.duelyst2.com/"]
 }
