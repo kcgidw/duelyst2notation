@@ -1,7 +1,7 @@
 let defaultSettings = {
-	fontSize: 32,
+	fontSize: 30,
 	opacity: 0.8,
-	leftHeight: 42,
+	leftHeight: 40,
 	leftXOffset: 25,
 	leftYOffset: 0,
 	leftStyle: 'A-E',
@@ -11,29 +11,20 @@ let defaultSettings = {
 	bottomStyle: '1-9',
 };
 
-function toggleNotation(keyEvent) {
-	if (keyEvent.key !== 'n') {
-		return;
-	}
-	let divs = document.querySelectorAll('.notation ');
-	if (divs.length) {
-		for (div of divs) {
-			div.remove();
-		}
-	} else {
-		rebuild();
+function notationExists() {
+	return document.querySelectorAll('.notation').length > 0;
+}
+
+function removeNotation() {
+	let notations = document.querySelectorAll('.notation');
+	for (div of notations) {
+		div.remove();
 	}
 }
-document.addEventListener('keydown', toggleNotation);
 
-function rebuild() {
+function buildNotation() {
 	chrome.storage.local.get(['settings'], function (result) {
 		let settings = { ...defaultSettings, ...(result?.settings ?? {}) };
-
-		let divs = document.querySelectorAll('.notation ');
-		for (div of divs) {
-			div.remove();
-		}
 		buildLeft(settings);
 		buildBottom(settings);
 	});
@@ -84,7 +75,7 @@ function buildLeft(settings) {
 		gap: settings.leftSpacing + 'px',
 		transform: 'skewX(-10deg)',
 		color: 'white',
-		textShadow: 'black 0 0 16px',
+		textShadow: 'black 0 0 12px',
 	});
 	Object.assign(inner.style, {
 		height: settings.leftHeight + 'vh',
@@ -122,7 +113,7 @@ function buildBottom(settings) {
 		justifyContent: 'center',
 		alignItems: 'center',
 		color: 'white',
-		textShadow: 'black 0 0 16px',
+		textShadow: 'black 0 0 12px',
 	});
 	Object.assign(inner.style, {
 		width: settings.bottomWidth + 'vw',
@@ -134,6 +125,25 @@ function buildBottom(settings) {
 
 chrome.runtime.onMessage.addListener(function (request) {
 	if (request.type === 'settings updated') {
-		rebuild();
+		removeNotation();
+		buildNotation();
 	}
 });
+
+setInterval(() => {
+	let game = document.getElementById('app-game');
+	if (game) {
+		let chooseHand = document.getElementById('app-game-choose-hand');
+		if (!chooseHand && !notationExists()) {
+			buildNotation();
+		}
+	} else {
+		removeNotation();
+	}
+}, 250);
+
+// document.addEventListener('keydown', function toggle(keyEvent) {
+// 	if (keyEvent.key !== 'n') {
+// 		return;
+// 	}
+// });

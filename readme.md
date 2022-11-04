@@ -1,8 +1,10 @@
 # Duelyst 2 Notation
 
-Board notation overlay extension. Press '**N**' to toggle overlay.
+Board notation overlay extension.
 
-Open the extension's toolbar menu to adjust font size, text positioning, etc. There are also multiple notation styles!
+Open the extension's toolbar menu to adjust font size, text positioning, etc.
+
+There are also multiple notation styles!
 
 Inspired by https://github.com/ethanjurman/DuelystNotation
 

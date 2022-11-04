@@ -1,7 +1,7 @@
 let defaultSettings = {
-	fontSize: 32,
+	fontSize: 30,
 	opacity: 0.8,
-	leftHeight: 42,
+	leftHeight: 40,
 	leftXOffset: 25,
 	leftYOffset: 0,
 	leftStyle: 'A-E',
@@ -13,7 +13,10 @@ let defaultSettings = {
 
 function populateForm(data) {
 	Object.keys(defaultSettings).forEach((id) => {
-		document.getElementById(id).value = data[id];
+		let el = document.getElementById(id);
+		if (el) {
+			el.value = data[id];
+		}
 	});
 }
 
