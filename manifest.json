@@ -1,0 +1,17 @@
+{
+	"manifest_version": 3,
+	"name": "Duelyst 2 Notation",
+	"description": "Board notation overlay for Duelyst 2",
+	"version": "0.0.1",
+	"action": {
+		"default_popup": "settings.html"
+	},
+	"content_scripts": [
+		{
+			"matches": ["https://alpha.duelyst2.com/"],
+			"js": ["notation.js"]
+		}
+	],
+	"permissions": ["tabs", "activeTab", "scripting", "storage"],
+	"host_permissions": ["https://alpha.duelyst2.com/"]
+}

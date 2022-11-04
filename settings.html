@@ -1,0 +1,118 @@
+<html>
+	<head>
+		<style>
+			body {
+				min-width: max-content;
+				font-size: 16px;
+			}
+			h1 {
+				font-size: 20px;
+			}
+			#cont {
+				display: grid;
+				grid-template-columns: max-content max-content;
+				gap: 8px;
+				margin: 20px 0;
+			}
+			label {
+				display: block;
+			}
+			#cont span {
+				display: flex;
+			}
+			#cont > * {
+				flex: 1;
+			}
+			input {
+				width: 3rem;
+			}
+			select {
+				width: 100%;
+			}
+		</style>
+		<script src="settings.js"></script>
+	</head>
+	<body>
+		<h1>Duelyst 2 Notation</h1>
+		Press 'N' to toggle notation overlay
+		<div id="cont">
+			<label>Font size</label>
+			<span
+				><input id="fontSize" type="number" value="" step="1" />px</span
+			>
+			<label>Opacity</label>
+			<input id="opacity" type="number" value="" step="0.1" />
+			<label>Left height</label>
+			<span
+				><input
+					id="leftHeight"
+					type="number"
+					value=""
+					step="1"
+				/>%</span
+			>
+			<label>Left X offset</label>
+			<span
+				><input
+					id="leftXOffset"
+					type="number"
+					value=""
+					step="1"
+				/>%</span
+			>
+			<label>Left Y offset</label>
+			<span
+				><input
+					id="leftYOffset"
+					type="number"
+					value=""
+					step="1"
+				/>%</span
+			>
+			<label>Left style</label>
+			<select id="leftStyle">
+				<option value="A-E">A-E</option>
+				<option value="a-e">a-e</option>
+				<option value="1-5">1-5</option>
+				<option value="0-4">0-4</option>
+				<option value="-2-2">-2-2</option>
+			</select>
+			<label>Bottom width</label>
+			<span
+				><input
+					id="bottomWidth"
+					type="number"
+					value=""
+					step="1"
+				/>%</span
+			>
+			<label>Bottom X offset</label>
+			<span
+				><input
+					id="bottomXOffset"
+					type="number"
+					value=""
+					step="1"
+				/>%</span
+			>
+			<label>Bottom Y offset</label>
+			<span
+				><input
+					id="bottomYOffset"
+					type="number"
+					value=""
+					step="1"
+				/>%</span
+			>
+			<label>Bottom style</label>
+			<select id="bottomStyle">
+				<option value="A-I">A-I</option>
+				<option value="a-i">a-i</option>
+				<option value="1-9">1-9</option>
+				<option value="0-8">0-8</option>
+				<option value="-4-4">-4-4</option>
+			</select>
+		</div>
+		<button id="reset">Restore defaults</button>
+	</body>
+</html>
