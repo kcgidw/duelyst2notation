@@ -1,6 +1,4 @@
-# Duelyst 2 Notation
-
-Board notation overlay extension.
+**Board notation overlay extension for Duelyst 2**
 
 Open the extension's toolbar menu to adjust font size, text positioning, etc.
 
@@ -16,8 +14,8 @@ Inspired by https://github.com/ethanjurman/DuelystNotation
 
 Chrome/Edge:
 
--   Click the "Code" button > download ZIP
--   Unzip folder
--   Chrome Extensions settings > enable developer mode
+-   click the "Code" button > download ZIP
+-   unzip folder
+-   go to Extensions page > enable developer mode
 -   "Load unpacked" > select folder
--   If Duelyst is open, close and reopen that tab
+-   if Duelyst is open, close and reopen that tab

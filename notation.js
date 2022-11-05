@@ -130,11 +130,23 @@ chrome.runtime.onMessage.addListener(function (request) {
 	}
 });
 
+function shouldShow() {
+	if (window.location.hostname.includes('duelyst2.com')) {
+		let d2Game = document.getElementById('app-game');
+		let d2ChooseHand = document.getElementById('app-game-choose-hand');
+		return d2Game && !d2ChooseHand;
+	} else if (window.location.hostname.includes('duelyst.gg')) {
+		// let ggText = document.getElementById('html_text');
+		// let ggEndTurn = [...ggText?.children].find(
+		// 	(c) => c.textContent === 'END TURN'
+		// );
+		// return ggEndTurn && ggEndTurn.style.visibility !== 'hidden';
+	}
+}
+
 setInterval(() => {
-	let game = document.getElementById('app-game');
-	if (game) {
-		let chooseHand = document.getElementById('app-game-choose-hand');
-		if (!chooseHand && !notationExists()) {
+	if (shouldShow()) {
+		if (!notationExists()) {
 			buildNotation();
 		}
 	} else {
