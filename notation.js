@@ -159,3 +159,5 @@ setInterval(() => {
 // 		return;
 // 	}
 // });
+
+console.log('[duelyst2notation] is running');
